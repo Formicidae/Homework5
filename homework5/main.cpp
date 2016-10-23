@@ -1,15 +1,17 @@
 #include <iostream>
+#include <string.h>
+#include <stdio.h>
 
 using namespace std;
 
 
-bool verify(string password){
+bool verify(char password[]){
 
-    if(password.length() < 6){
+    if(strlen(password) < 6){
         cout << "password must be atleast 6 characters";
         return false;
     }
-    if(password.length() > 14){
+    if(strlen(password) > 14){
         cout << "password must be less than 14 characters";
         return false;
     }
@@ -18,17 +20,17 @@ bool verify(string password){
     bool cLower;
     bool cDigit;
     bool cPunc;
-    for(int i = 0;i < password.length();i++){
-        if(password[i] < 91 && password[i] > 64){
+    for(int i = 0;i < strlen(password);i++){
+        if(isupper(password[i])){
             cUpper = true;
         }
-        if(password[i] < 123 && password[i] > 96){
+        if(islower(password[i])){
             cLower = true;
         }
-        if(password[i] < 58 && password[i] > 47){
+        if(isdigit(password[i])){
             cDigit = true;
         }
-        if(password[i] == 33 || password[i] == 63 || password[i] == 46 || password[i] == 48 || password[i] == 49 || password[i] == 44 ||password[i] == 34 ||password[i] == 96 ||password[i] == 45 ||password[i] == 40 ||password[i] == 41){
+        if(ispunct(password[i])){
             cPunc = true;
         }
     }
@@ -52,106 +54,37 @@ bool verify(string password){
 
 }
 
-
-
 int main()
 {
-    char first[12];
-    char last[12];
-    char middle[12];
-    char full[40];
-    //cout << "Enter your first name, or all at once with spaces in between\n";
-    cout << "Enter you first middle and last name space separated.";
+    char first[13];
+    char last[13];
+    char middle[13];
+    cout << "Enter you first middle and last name space separated.(Up to 12 chars each)";
 
     cin >> first;
-    //cout << "Enter your middle name\n";
     cin >> middle;
-    //cout << "Enter your last name\n";
     cin >> last;
 
+    char* dFull = new char[strlen(first) + strlen(middle) + strlen(last) + 5];
+    strcpy(dFull,last);
+    strcat(dFull,", ");
+    strcat(dFull,first);
+    strcat(dFull," ");
+    strcat(dFull,middle);
 
-    int i = 0;
-    while(isalpha(first[i])){
-        cout << first[i++];
-    }
+    cout << endl;cout << endl;
+    puts(dFull);
+    cout << endl;cout << endl;
 
-    i = 0;
-    while(isalpha(middle[i])){
-        cout << middle[i++];
-    }
-
-    i = 0;
-    while(isalpha(last[i])){
-        cout << last[i++];
-    }
-
-    i = 0;
-    while(isalpha(last[i])){
-        full[i] = last[i++];
-    }
-    i++;
-    full[i] = ',';
-    i++;
-    full[i] = ' ';
-    i++;
-    int j = 0;
-    while(isalpha(first[j])){
-        full[i++] = first[j++];
-    }
-    i++;
-    full[i++] = ' ';
-    int k = 0;
-    while(isalpha(middle[k])){
-        full[i++] = middle[k++];
-    }
-    i++;
-    full[i] = ' ';
-
-    //full = last + ", " + first + " " + middle;
-    //cout << full + "\n\n";
-
-    cout << endl;
-/*
-    i = 0;
-    while(isalpha(full[i]) || ispunct(full[i])){
-        cout << full[i++];
-    }
-
-    cout << full[i++];
-    while(isalpha(full[i])){
-        cout << full[i++];
-    }
-
-    cout << full[i++];
-
-    while(isalpha(full[i])){
-        cout << full[i++];
-    }
-*/
-    int p = 1;
-    int spaces = 0;
-    while(true){
-        if(isspace(full[p])){
-            spaces++;
-            if(spaces == 4)
-                break;
-        }
-
-        cout << full[p];
-        p++;
-
-    }
-    cout << endl;
-
+    cin.ignore(256,'\n');
     bool goodPass = false;
     while(!goodPass)
     {
-        cout << "Enter a password";
-        string password;
-        cin >> password;
+        cout << "\nEnter a password";
+        char password[16];
+        cin.getline(password,15);
         goodPass = verify(password);
     }
-
-
+    cout << "Password is Valid";
     return 0;
 }
