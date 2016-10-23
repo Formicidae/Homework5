@@ -56,20 +56,92 @@ bool verify(string password){
 
 int main()
 {
+    char first[12];
+    char last[12];
+    char middle[12];
+    char full[40];
+    //cout << "Enter your first name, or all at once with spaces in between\n";
+    cout << "Enter you first middle and last name space separated.";
 
-    cout << "Enter your first name, or all at once with spaces in between\n";
-    string first;
     cin >> first;
-    cout << "Enter your middle name\n";
-    string middle;
+    //cout << "Enter your middle name\n";
     cin >> middle;
-    cout << "Enter your last name\n";
-    string last;
+    //cout << "Enter your last name\n";
     cin >> last;
-    string full;
-    full = last + ", " + first + " " + middle;
-    cout << full + "\n\n";
 
+
+    int i = 0;
+    while(isalpha(first[i])){
+        cout << first[i++];
+    }
+
+    i = 0;
+    while(isalpha(middle[i])){
+        cout << middle[i++];
+    }
+
+    i = 0;
+    while(isalpha(last[i])){
+        cout << last[i++];
+    }
+
+    i = 0;
+    while(isalpha(last[i])){
+        full[i] = last[i++];
+    }
+    i++;
+    full[i] = ',';
+    i++;
+    full[i] = ' ';
+    i++;
+    int j = 0;
+    while(isalpha(first[j])){
+        full[i++] = first[j++];
+    }
+    i++;
+    full[i++] = ' ';
+    int k = 0;
+    while(isalpha(middle[k])){
+        full[i++] = middle[k++];
+    }
+    i++;
+    full[i] = ' ';
+
+    //full = last + ", " + first + " " + middle;
+    //cout << full + "\n\n";
+
+    cout << endl;
+/*
+    i = 0;
+    while(isalpha(full[i]) || ispunct(full[i])){
+        cout << full[i++];
+    }
+
+    cout << full[i++];
+    while(isalpha(full[i])){
+        cout << full[i++];
+    }
+
+    cout << full[i++];
+
+    while(isalpha(full[i])){
+        cout << full[i++];
+    }
+*/
+    int p = 1;
+    int spaces = 0;
+    while(true){
+        if(isspace(full[p])){
+            spaces++;
+            if(spaces == 4)
+                break;
+        }
+
+        cout << full[p];
+        p++;
+
+    }
+    cout << endl;
 
     bool goodPass = false;
     while(!goodPass)
