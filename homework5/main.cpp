@@ -1,10 +1,8 @@
+//Edward Bates emb160030 CS 1337.002 Homework 5
 #include <iostream>
 #include <string.h>
 #include <stdio.h>
-
 using namespace std;
-
-
 bool verify(char password[]){
 
     if(strlen(password) < 6){
@@ -15,24 +13,19 @@ bool verify(char password[]){
         cout << "password must be less than 14 characters";
         return false;
     }
-
     bool cUpper;
     bool cLower;
     bool cDigit;
     bool cPunc;
     for(int i = 0;i < strlen(password);i++){
-        if(isupper(password[i])){
+        if(isupper(password[i]))
             cUpper = true;
-        }
-        if(islower(password[i])){
+        if(islower(password[i]))
             cLower = true;
-        }
-        if(isdigit(password[i])){
+        if(isdigit(password[i]))
             cDigit = true;
-        }
-        if(ispunct(password[i])){
+        if(ispunct(password[i]))
             cPunc = true;
-        }
     }
     if(!cUpper){
         cout << "Password must contain 1 Uppercase character";
@@ -51,16 +44,13 @@ bool verify(char password[]){
         return false;
     }
     return true;
-
 }
-
 int main()
 {
     char first[13];
     char last[13];
     char middle[13];
     cout << "Enter you first middle and last name space separated.(Up to 12 chars each)";
-
     cin >> first;
     cin >> middle;
     cin >> last;
@@ -71,7 +61,6 @@ int main()
     strcat(dFull,first);
     strcat(dFull," ");
     strcat(dFull,middle);
-
     cout << endl;cout << endl;
     puts(dFull);
     cout << endl;cout << endl;
